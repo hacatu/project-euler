@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Primesum</title>
+</head>
+<body>
+	<script>
+		var p=[],n=0,s=2,x=3,t=true,r;
+		while(x<2000000){
+			r=Math.sqrt(x);
+			for(var i=0;i<n;i++){
+				if(!((x/p[i])%1)){
+					t=false;
+					break;
+				}
+				if(p[i]>r)
+					break;
+			}
+			if(t){
+				p.push(x);
+				n++;
+				s+=x;
+			}else{
+				t=true;
+			}
+			x+=2;
+		}
+		console.log(performance.now());
+		alert(s);
+	</script>
+</body>
+</html>

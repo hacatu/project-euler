@@ -26,7 +26,7 @@ int isPower2(int n){//do not call on 0
 int readBoard(FILE *file, int *board){
 	int row;
 	for(int i = 0; i < 9; ++i){
-		if(fscanf(file, "%i", &row) <= 0){
+		if(fscanf(file, "%d", &row) <= 0){
 			return 0;
 		}
 		for(int j = 8; j >= 0; --j){
@@ -268,13 +268,13 @@ int corner(int *board){
 }
 
 int main(void){
-	FILE *file = fopen("telegraph_sudoku.txt", "r");
+	FILE *file = fopen("plb_sudoku.txt", "r");
 	if(!file){
 		puts("could not open file");
 		return 1;
 	}
 	int board[81], s = 0;
-	for(int i = 0; i < 1; ++i){
+	for(int i = 0; i < 20; ++i){
 		if(!readBoard(file, board)){
 			puts("could not read board");
 			return 1;

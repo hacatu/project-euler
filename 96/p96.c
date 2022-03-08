@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 int digitMask[10] = {0b111111111, 1, 1<<1, 1<<2, 1<<3, 1<<4, 1<<5, 1<<6, 1<<7, 1<<8};
 
@@ -268,25 +269,29 @@ int corner(int *board){
 }
 
 int main(void){
-	FILE *file = fopen("plb_sudoku.txt", "r");
+	FILE *file = fopen("sudoku.txt", "r");
 	if(!file){
 		puts("could not open file");
 		return 1;
 	}
 	int board[81], s = 0;
-	for(int i = 0; i < 20; ++i){
+	for(int i = 0; i < 50; ++i){
 		if(!readBoard(file, board)){
 			puts("could not read board");
 			return 1;
 		}
 		//puts("input----");
 		//printBoard(board);
+		struct timespec start, end;
+		clock_gettime(CLOCK_MONOTONIC_RAW, &start);
 		if(!solve(board)){
 			printf("could not solve board %i\n", i);
 			return 1;
 		}
+		clock_gettime(CLOCK_MONOTONIC_RAW, &end);
 		//puts("output---");
-		//printBoard(board);
+		printBoard(board);
+		printf("solved in %.3fus\n", end.tv_sec*1e6 + end.tv_nsec*1e-3 - start.tv_sec*1e6 - start.tv_nsec*1e-3);
 		s += corner(board);
 	}
 	fclose(file);

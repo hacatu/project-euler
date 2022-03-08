@@ -57,6 +57,7 @@ int main(int argc, char **argv){
 	int doubles = 0;
 	int roll1, roll2;
 	srand(time(NULL));
+	#pragma omp parallel for
 	for(int run = 0; run < runs; ++run){
 		roll1 = roll();
 		roll2 = roll();
@@ -148,7 +149,10 @@ int main(int argc, char **argv){
 				break;
 			}
 		}
-		++spaces[space];
+		#pragma omp critical
+		{
+			++spaces[space];
+		}
 	}
 	for(int space = 0; space < 40; ++space){
 		printf("P(%2i) = %f\n", space, (double)spaces[space]/(double)runs);

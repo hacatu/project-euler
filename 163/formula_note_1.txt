@@ -1,0 +1,153 @@
+ABC = N**2
+
+
+abc = N*(N-1)/2
+
+
+Abc = (6*Sum(binomial(n+1,2), (n,1,floor(3*N/4))) +
+3*Sum(Sum(n+1-w, (w,1,3*(N-n))), (n,floor(3*N/4)+1,N-1)) +
+3*Sum(binomial(n+1,2), (n,floor(3*N/4)+1,N)))
+
+Abc = -5*N**3/2 + 27*N**2*floor(3*N/4)/2 + 21*N**2/2 -
+18*N*floor(3*N/4)**2 - 45*N*floor(3*N/4)/2 - 5*N +
+8*floor(3*N/4)**3 + 15*floor(3*N/4)**2 + 7*floor(3*N/4)
+
+
+ABc = Piecewise((
+	12*Sum(binomial(n+1,2), (n,1,(N - 2)/2)) +
+	12*Sum(binomial(n+1,2), (n,1,(N - 2)/2)) +
+	6*binomial((N + 2)/2,2), is_even(N)
+), (
+	12*Sum(binomial(n+1,2), (n,1,(N - 3)/2)) +
+	12*Sum(binomial(n+1,2), (n,1,(N - 1)/2)) +
+	6*binomial((N + 1)/2,2), is_odd(N)
+))
+
+ABc = Piecewise((N*(N + 2)*(2*N - 1)/4, Eq(Mod(N, 2), 0)),
+(2*(N + 1)*binomial(N/2 - 1/2, 2) +
+2*(N + 3)*binomial(N/2 + 1/2, 2) + 6*binomial(N/2 + 1/2, 2),
+Eq(Mod(N, 2), 1)))
+
+
+AaC = (6*Sum(binomial(n+1,2), (n,1,N)) +
+6*Sum(binomial(n+1,2), (n,1,floor(2*N/3))) +
+6*Sum(Sum(n+1-w, (w,1,2*(N-n))), (n,floor(2*N/3)+1,N-1)))
+
+AaC = -N**3 + 12*N**2*floor(2*N/3) + 12*N**2 -
+18*N*floor(2*N/3)**2 - 24*N*floor(2*N/3) - 5*N +
+9*floor(2*N/3)**3 + 18*floor(2*N/3)**2 + 9*floor(2*N/3)
+
+
+Aac = (Piecewise((
+	12*Sum(Sum(3*k, (k,1,n)), (n,1,(N-2)/2)) +
+	12*Sum(Sum(3*k-2, (k,1,n)), (n,1,N/2)) +
+	6*Sum(3*k, (k,1,N/2)), is_even(N)
+), (
+	12*Sum(Sum(3*k, (k,1,n)), (n,1,(N-1)/2)) +
+	12*Sum(Sum(3*k-2, (k,1,n)), (n,1,(N-1)/2)) +
+	6*Sum(3*k-2, (k,1,(N+1)/2)), is_odd(N)
+)) +
+6*Sum(floor((N-n)/2)*(floor((N-n)/2)+1) + (n+1-floor((N-n)/2))*(N-n), (n,floor(3*N/5)+1,N-1)))
+
+Aac = Piecewise((
+	3*N**3/2 + 15*N**2/4 + 3*N/2 +
+	6*Sum((N - n)*(n - floor(N/2 - n/2) + 1) + (floor(N/2 - n/2) + 1)*floor(N/2 - n/2), (n, floor(3*N/5) + 1, N - 1)),
+	Eq(Mod(N, 2), 0)
+), (
+	3*N**3/2 + 15*N**2/4 + 3*N/2 - 3/4 +
+	6*Sum((N - n)*(n - floor(N/2 - n/2) + 1) + (floor(N/2 - n/2) + 1)*floor(N/2 - n/2), (n, floor(3*N/5) + 1, N - 1)),
+	Eq(Mod(N, 2), 1))
+)
+
+
+
+Aac_alt = (Piecewise((
+	12*Sum(Sum(3*k, (k,1,n)), (n,1,(N-2)/2)) +
+	12*Sum(Sum(3*k-2, (k,1,n)), (n,1,N/2)) +
+	6*Sum(3*k, (k,1,N/2)), is_even(N)
+), (
+	12*Sum(Sum(3*k, (k,1,n)), (n,1,(N-1)/2)) +
+	12*Sum(Sum(3*k-2, (k,1,n)), (n,1,(N-1)/2)) +
+	6*Sum(3*k-2, (k,1,(N+1)/2)), is_odd(N)
+)) + 6*Piecewise((
+	Sum(floor((N-2*k)/2)*(floor((N-2*k)/2)+1) + (2*k+1-floor((N-2*k)/2))*(N-2*k), (k,floor(3*N/10)+1,floor((N-1)/2))) +
+	Sum(floor((N-2*k+1)/2)*(floor((N-2*k+1)/2)+1) + (2*k+2-floor((N-2*k+1)/2))*(N-2*k+1), (k,floor((3*N+5)/10),floor(N/2)-1)),
+	is_even(N)
+), (
+	Sum(floor((N-2*k)/2)*(floor((N-2*k)/2)+1) + (2*k+1-floor((N-2*k)/2))*(N-2*k), (k,floor(3*N/10)+1,floor((N-1)/2))) +
+	Sum(floor((N-2*k+1)/2)*(floor((N-2*k+1)/2)+1) + (2*k+2+1-floor((N-2*k+1)/2))*(N-2*k+1), (k,floor((3*N+5)/10),floor(N/2)-1)),
+	is_odd(N)
+)))
+
+Aac_alt = 6*Piecewise((3*N*(-floor(3*N/10)**2/2 - floor(3*N/10)/2 + floor(N/2 - 1/2)**2/2 + floor(N/2 - 1/2)/2) + 3*N*(floor(N/2)**2/2 - floor(N/2)/2 - floor(3*N/10 + 1/2)**2/2 + floor(3*N/10 + 1/2)/2) + (-floor(3*N/10) + floor(N/2 - 1/2))*(-N*floor(N/2) + N + floor(N/2)**2 + floor(N/2)) + (floor(N/2) - floor(3*N/10 + 1/2))*(-N*floor(N/2 + 1/2) + 2*N + floor(N/2 + 1/2)**2 + 2) + 5*floor(3*N/10)**3/3 + 4*floor(3*N/10)**2 + 7*floor(3*N/10)/3 - 5*floor(N/2)**3/3 + 3*floor(N/2)**2/2 + floor(N/2)/6 + 5*floor(3*N/10 + 1/2)**3/3 - 3*floor(3*N/10 + 1/2)**2/2 - floor(3*N/10 + 1/2)/6 - 5*floor(N/2 - 1/2)**3/3 - 4*floor(N/2 - 1/2)**2 - 7*floor(N/2 - 1/2)/3, Eq(Mod(N, 2), 0) | Eq(Mod(N, 2), 1))) + Piecewise((3*N**3/2 + 15*N**2/4 + 3*N/2, Eq(Mod(N, 2), 0)), (3*N**3/2 + 15*N**2/4 + 3*N/2 - 3/4, Eq(Mod(N, 2), 1)))
+
+Aac_alt = 6*(
+	3*N*(-floor(3*N/10)**2/2 - floor(3*N/10)/2 + floor(N/2 - 1/2)**2/2 + floor(N/2 - 1/2)/2) +
+	3*N*(floor(N/2)**2/2 - floor(N/2)/2 - floor(3*N/10 + 1/2)**2/2 + floor(3*N/10 + 1/2)/2) +
+	(-floor(3*N/10) + floor(N/2 - 1/2))*(-N*floor(N/2) + N + floor(N/2)**2 + floor(N/2)) +
+	(floor(N/2) - floor(3*N/10 + 1/2))*(-N*floor(N/2 + 1/2) + 2*N + floor(N/2 + 1/2)**2 + 2) +
+	5*floor(3*N/10)**3/3 + 4*floor(3*N/10)**2 + 7*floor(3*N/10)/3 - 5*floor(N/2)**3/3 + 3*floor(N/2)**2/2 +
+	floor(N/2)/6 + 5*floor(3*N/10 + 1/2)**3/3 - 3*floor(3*N/10 + 1/2)**2/2 - floor(3*N/10 + 1/2)/6 -
+	5*floor(N/2 - 1/2)**3/3 - 4*floor(N/2 - 1/2)**2 - 7*floor(N/2 - 1/2)/3) +
+Piecewise((
+	3*N**3/2 + 15*N**2/4 + 3*N/2,
+	Eq(Mod(N, 2), 0)
+), (
+	3*N**3/2 + 15*N**2/4 + 3*N/2 - 3/4,
+	Eq(Mod(N, 2), 1)
+))
+
+Aac_alt = (
+	-9*N*floor(3*N/10)**2 - 9*N*floor(3*N/10) + 9*N*floor((N - 1)/2)**2 + 9*N*floor((N - 1)/2) + 9*N*floor(N/2)**2 - 9*N*floor(N/2) - 9*N*floor((3*N + 5)/10)**2 + 9*N*floor((3*N + 5)/10)
+	-6*floor(3*N/10)*N*floor(N/2) - 6*floor(3*N/10)*N - 6*floor(3*N/10)*floor(N/2)**2 - 6*floor(3*N/10)*floor(N/2) +
+	-6*floor((N - 1)/2)*N*floor(N/2) + 6*floor((N - 1)/2)*N + 6*floor((N - 1)/2)*floor(N/2)**2 + 6*floor((N - 1)/2)*floor(N/2) +
+	-6*floor(N/2)*N*floor((N + 1)/2) + 12*floor(N/2)*N + 6*floor(N/2)*floor((N + 1)/2)**2 + 12*floor(N/2) +
+	6*floor((3*N + 5)/10)*N*floor((N + 1)/2) - 12*floor((3*N + 5)/10)*N - 6*floor((3*N + 5)/10)*floor((N + 1)/2)**2 - 12*floor((3*N + 5)/10) +
+	10*floor(3*N/10)**3 + 24*floor(3*N/10)**2 + 14*floor(3*N/10) - 10*floor(N/2)**3 + 9*floor(N/2)**2 +
+	floor(N/2) + 10*floor((3*N + 5)/10)**3 - 9*floor((3*N + 5)/10)**2 - floor((3*N + 5)/10) -
+	10*floor((N - 1)/2)**3 - 24*floor((N - 1)/2)**2 - 14*floor((N - 1)/2)) +
+Piecewise((
+	3*N**3/2 + 15*N**2/4 + 3*N/2,
+	Eq(Mod(N, 2), 0)
+), (
+	3*N**3/2 + 15*N**2/4 + 3*N/2 - 3/4,
+	Eq(Mod(N, 2), 1)
+))
+
+Aac_alt = (
+	-9*N*floor(3*N/10)**2 - 9*N*floor(3*N/10) + 9*N*floor((N + 1)/2)**2 - 18*N*floor((N + 1)/2) + 9*N*floor((N + 1)/2) + 9*N*floor(N/2)**2 - 9*N*floor(N/2) - 9*N*floor((3*N + 5)/10)**2 + 9*N*floor((3*N + 5)/10)
+	-6*floor(3*N/10)*N*floor(N/2) - 6*floor(3*N/10)*N - 6*floor(3*N/10)*floor(N/2)**2 - 6*floor(3*N/10)*floor(N/2) +
+	-6*floor((N + 1)/2)*N*floor(N/2) + 6*N*floor(N/2) + 6*floor((N + 1)/2)*N - 6*N + 6*floor((N + 1)/2)*floor(N/2)**2 - 6*floor(N/2)**2 + 6*floor((N + 1)/2)*floor(N/2) - 6*floor(N/2) +
+	-6*floor(N/2)*N*floor((N + 1)/2) + 12*floor(N/2)*N + 6*floor(N/2)*floor((N + 1)/2)**2 + 12*floor(N/2) +
+	6*floor((3*N + 5)/10)*N*floor((N + 1)/2) - 12*floor((3*N + 5)/10)*N - 6*floor((3*N + 5)/10)*floor((N + 1)/2)**2 - 12*floor((3*N + 5)/10) +
+	10*floor(3*N/10)**3 + 24*floor(3*N/10)**2 + 14*floor(3*N/10) - 10*floor(N/2)**3 + 9*floor(N/2)**2 +
+	floor(N/2) + 10*floor((3*N + 5)/10)**3 - 9*floor((3*N + 5)/10)**2 - floor((3*N + 5)/10) -
+	10*floor((N + 1)/2)**3 + 10*floor((N + 1)/2)**2 - 10*floor((N + 1)/2) + 10 - 24*floor((N + 1)/2)**2 + 48*floor((N + 1)/2) - 24 - 14*floor((N + 1)/2) + 14) +
+Piecewise((
+	3*N**3/2 + 15*N**2/4 + 3*N/2,
+	Eq(Mod(N, 2), 0)
+), (
+	3*N**3/2 + 15*N**2/4 + 3*N/2 - 3/4,
+	Eq(Mod(N, 2), 1)
+))
+
+Aac_alt = (
+	+10*floor(3*N/10)**3 - 10*floor(N/2)**3 + 10*floor((3*N + 5)/10)**3 - 10*floor((N + 1)/2)**3
+	-9*N*floor(3*N/10)**2 + 9*N*floor((N + 1)/2)**2 + 9*N*floor(N/2)**2 - 9*N*floor((3*N + 5)/10)**2
+	-6*floor(3*N/10)*floor(N/2)**2 + 6*floor((N + 1)/2)*floor(N/2)**2 + 6*floor(N/2)*floor((N + 1)/2)**2 - 6*floor((3*N + 5)/10)*floor((N + 1)/2)**2
+	-6*N*floor(3*N/10)*floor(N/2) - 12*N*floor((N + 1)/2)*floor(N/2) + 6*N*floor((3*N + 5)/10)*floor((N + 1)/2)
+	
+	-15*N*floor(3*N/10) - 3*N*floor((N + 1)/2) + 9*N*floor(N/2) - 3*N*floor((3*N + 5)/10)
+	-6*floor(3*N/10)*floor(N/2) + 6*floor((N + 1)/2)*floor(N/2)
+	+24*floor(3*N/10)**2 + 3*floor(N/2)**2 - 9*floor((3*N + 5)/10)**2 - 14*floor((N + 1)/2)**2
+	
+	-6*N + 7*floor(N/2) - 13*floor((3*N + 5)/10) + 14*floor(3*N/10) + 24*floor((N + 1)/2))
+	+
+Piecewise((
+	3*N**3/2 + 15*N**2/4 + 3*N/2,
+	Eq(Mod(N, 2), 0)
+), (
+	3*N**3/2 + 15*N**2/4 + 3*N/2 - 3/4,
+	Eq(Mod(N, 2), 1)
+))
+

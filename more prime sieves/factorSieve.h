@@ -2,24 +2,17 @@
 
 #include <inttypes.h>
 
-#ifndef MAX_FACTORS
-//15 is the absolute maximum for a uint64_t
-//9 is the absolute maximum for a uint32_t
-#define MAX_FACTORS 9
-#endif
-#ifndef MAX
-#define MAX 223092869
-#endif
-
 typedef struct {uint64_t factor, power;} PrimeFactor;
 
-typedef PrimeFactor PrimeFactors[MAX_FACTORS];
+uint64_t countDivisors(uint64_t m; uint64_t n, const PrimeFactor fs[static n][m], uint64_t m);
 
-uint64_t countDivisors(uint64_t n, PrimeFactors *fs);
+uint64_t countDivisorsPow(uint64_t m; uint64_t n, uint64_t p, const PrimeFactor fs[static n][m], uint64_t m);
 
-uint64_t countDivisorsPow(uint64_t n, uint64_t p, PrimeFactors *fs);
+uint64_t phi(uint64_t m; uint64_t n, const PrimeFactor fs[static n][m], uint64_t m);
 
-PrimeFactors *factorSieve(uint64_t max);
+int isPrimeFactorization(uint64_t m; uint64_t n, const PrimeFactor fs[static n][m], uint64_t m);
 
-void printFact(PrimeFactors fact);
+void *factorSieve(uint64_t max, uint64_t *max_factors);
+
+void printFact(uint64_t m; const PrimeFactor fact[static m], uint64_t m);
 

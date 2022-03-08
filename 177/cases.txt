@@ -1,0 +1,41 @@
+Consider representing a quadrilateral as 5 angles: a, b, c, d, e.  With one diagonal horizontal,
+a is the angle between it and the top left side, and b, c, and d are the angles immediately after
+the other corners going clockwise.  e is the angle between the horizontal diagonal and the bottom left
+side.  Let Q = (a, b, c, d, e).  Let R refer to rotation once counterclockwise, so
+R (a, b, c, d, e) = (b, c, d, a, 180 - a - d - e).  Let M refer to mirroring over the vertical line, so
+M (a, b, c, d, e) = (d + e - b, 180 - a - d - e, e, 180 - c - d - e, c)
+We want to find a function g from quadrilaterals Q to booleans so that
+forall Q, i, j: g Q & g M^i*R^j*Q -> Q = M^i*R^j*Q and
+forall Q: thereexists i, j: g M^i*R^j*Q
+
+Consider g (a, b, c, d, e) =
+	d + e < 90 & c < a
+	           & c = a & d < b
+	                   & d = b & e <= d
+	d + e = 90 & a - d > b - a, c - b, d - c & a + d > 90
+	                                         & a + d = 90 & b + c >= 90
+	           & a - d = b - a > c - b >= d - c
+	           & a - d = c - b > b - a >= d - c
+	           & a - d = b - a = d - c >= c - b
+
+Proof that g Q & g RQ -> Q == RQ:
+	Have: g (a, b, c, d, e) & g (b, c, d, a, 180 - a - d - e).
+	Want: a = b = c = d & d + e = 90
+	The sum of the last two angles is <= 90 in all cases of g
+		d + e <= 90 & a + 180 - a - e <= 90
+		d + e <= 90 <= d + e
+		d + e = 90
+	In all cases of g where d + e = 90, the leftmost angle of Q is the largest so
+		a - d >= b - a, c - b, d - c & b - a >= c - b, d - c, a - d
+		a - d = b - a >= c - b, d - c
+	This means the transformed quadrilateral has its left and bottom angles as its largest.
+	This is only permissible in g if its top angle is also its largest so we get
+		a - d = b - a = c - b >= d - c
+	The only case for Q where this is permissible is when
+		a - d = b - a = c - b = d - c
+	a + 90 - d, b + 90 - a, c + 90 - b, d + 90 - d are the angles of the quadrilateral so they add
+	up to 360.  Subtracting 90 from each we find
+		a - d + b - a + c - b + d - c = 0.  But a - d = b - a = c - b = d - c so
+		a - d = b - a = c - b = d - c = 0.  So a = b = c = d as desired.  Furthermore (because we will use
+		this result later), 
+

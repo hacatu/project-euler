@@ -1,0 +1,33 @@
+I solved this one by hand :)
+
+We know the dragon curve (RRLRRLL) is recursively defined by $D_{n+1}=D_nR\mathrm{flip}(D_n)$.  Quick inspection reveals a couple things:
+-If the offset $d_n$ is viewed as a complex number, $d_{n+1} = d_n + ud_n$ for some unit $u$
+-There is always exactly one more right turn than left turn, so the end is pointing right (and the next turn when doubling will be right)
+-So in fact we turn clockwise a quarter turn so $u=-i$ and $d_{n+1}=(1-i)d_n$
+-$d_0=i$ so $d_n=(1-i)^n i$.
+
+$(1-i)=\sqrt{2}e^{-\frac{\pi}{4}i}$ which makes it more obvious that the powers of this multiplier are 8-periodic.  We can even write them out: $(1-i)^2=-2i$, $(1-i)^3=-2-2i$, $(1-i)^4=-4$, $(1-i)^5=-4+4i$, $(1-i)^6=8i$, and $(1-i)^7=8+8i$.  $(1-i)^8=16$.
+
+Now, from the recursive nature of the dragon curve, we know if a number $x=2^{n_1}+\cdots+2^{n_r}$ in binary, we have to go along complete $D_{n_1}$ through $D_{n_r}$ curves, although their orientation relative to each other is not immediately obvious (and some will be flipped).
+
+It's easy to see that all curves except possibly the last one in this binary representation sequence have even length and so start from a horizontal line segment.  The last one could be $D_0$ which ends in a vertical segment, but we wouldn't add a curve after it because it is the last one.  So we just have to determine whether the next curve starts up or down.
+
+This turns out to be pretty simple: there's a way to determine the direction of the $n$th turn in the curve with an explicit formula, and this same criterion tells us when we need to flip from 1 to -1 as the coefficient when adding the $d_{n_i}$.
+
+If $n=m2^t$ where $m$ is odd, if $m$ is 1 mod 4 we turn right, otherwise $m$ is 3 and we turn left.
+
+Thus, every time we encounter a "01" in the binary expansion of $x$ when finding the position for $x$, the sign is flipped for SUBSEQUENT $d_n$.
+
+For example, $1111\to d_3-d_2-d_1-d_0$, $10111\to d_4-d_2+d_1+d_0$, $10101\to d_4-d_2+d_0$, $101011\to d_5-d_3+d_1-d_0$.  Notice how the first sign is always positive and then the second sign is always negative, because the first 1 is preceded by an unwritten 0.  Having 2 or 2000 zeros instead of 1 makes no difference: this rule is just a restatement of the mod 4 condition for the direction of a turn.
+
+Thus (let $\eta=1-i$)
+$$10^{12}=2^{39}+2^{38}+2^{37}+2^{35}+2^{31}+2^{30}+2^{28}+2^{26}+2^{23}+2^{21}+2^{18}+2^{16}+2^{12}$$
+$$z=d_{39}-d_{38}-d_{37}-d_{35}+d_{31}-d_{30}-d_{28}+d_{26}-d_{23}+d_{21}-d_{18}+d_{16}-d_{12}$$
+$$z=i(\eta^{39}-\eta^{38}-\eta^{37}-\eta^{35}+\eta^{31}-\eta^{30}-\eta^{28}+\eta^{26}-\eta^{23}+\eta^{21}-\eta^{18}+\eta^{16}-\eta^{12})$$
+$$z=i\eta^{8+4}(\eta^{3\cdot 8+3}-\eta^{3\cdot 8+2}-\eta^{3\cdot 8+1}-\eta^{2\cdot 8+7}+\eta^{2\cdot 8+3}-\eta^{2\cdot 8+2}-\eta^{2\cdot 8+0}+\eta^{8+6}-\eta^{8+3}+\eta^{8+1}-\eta^{6}+\eta^{4}-1)$$
+$$z=-64i(4096(-2-2i+2i-1+i)+256(-8-8i-2-2i+2i-1)+16(8i+2+2i+1-i)-8i-4-1)$$
+$$z=-64i(4096(-3+i)+256(-11-8i)+16(3+9i)-5-8i)$$
+$$z=-64i(-15061+2184i)$$
+$$z=139776+963904i$$
+
+This method is closely analogous to binary exponentiation, so a program could easily be written using it to find any position in the dragon curve that can be stored on a computer extremely quickly.  It looks like an $O(\log(n))$ algorithm at first sight because it requires $\log(n)$ multiplications and up to as many additions, but the numbers stored become large fairly quickly so the complexity of multiplications has to be taken into account.  $p_n$ will have at most $\log(n)/2$ bits (base 2) so the algorithm is really $O(\log^2(n)\log\log(n))$ if one bothers to use a big number library with fast multiplication.

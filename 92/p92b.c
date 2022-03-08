@@ -27,6 +27,7 @@ int main(){
 		digitSquares[i] = digitSquares[i/10] + digitSquares[i%10];
 	}
 	uint64_t c = 0;
+#pragma omp parallel for reduction(+:c)
 	for(uint64_t i = 2; i < 10000000; ++i){
 		if(end(i) == 4){
 			++c;

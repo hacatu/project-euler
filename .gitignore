@@ -6,6 +6,14 @@
 *.exe
 *.o
 *.so
+*.hi
+*.a
+*.so
+*.bin
+*.gcda
+*.gcno
+lcov.info
+*.hi
 # Packages #
 ############
 # it's better to unpack these files and commit the raw source
@@ -32,3 +40,10 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+vgcore.*
+callgrind.out.*
+gmon.out
+__pycache__/
+.stack_work/
+cov_html/
+cov/

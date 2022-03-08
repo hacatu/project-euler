@@ -1,0 +1,7 @@
+The resiliance R(d) = phi(d)/(d - 1) where phi is Euler's totient function.
+phi(p_1*...*p_n)/(p_1*...*p_n - 1) = (p_1 - 1)*...*(p_n - 1)/(p_1*...*p_n - 1)
+And for n=10 so p_n=29, R(d)=1021870080/892371479, which is below 15499/94744.
+For n=9, R(d)=36495360/223092869 and 36495360/223092870 < 15499/94744 < 36495360/223092869
+so I would expect some multiple of d = 223092870 to work and indeed 892371480 = 4*223092870
+works.
+

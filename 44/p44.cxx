@@ -9,6 +9,7 @@ int main(){
   unsigned int P[53510];
   unsigned int pk;
   for(unsigned int d=1,pd=p(1);d<=53510;pd=p(++d)){
+    printf("%ui\n",d);
     isp.insert(pd);
     P[d]=pd;
   }
